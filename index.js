@@ -7,13 +7,16 @@ const fastifyStatic = require('@fastify/static');
 const { fileURLToPath } = require('url');
 const HOST="0.0.0.0";
 const PORT= 3002;
-const NAME= "Gladys";
 
+
+// POUR VERSION SEND FICHIER
 // Enregistrement du plugin avec le dossier contenant vos fichiers publics
 fastify.register(fastifyStatic, {
   root: '/opt/server-api/backups',
   prefix: '/opt/server-api/backups/', // Optionnel : préfixe pour vos URL (ex: /public/mon-fichier.pdf)
 });
+
+
 
 fastify.get('/', function (request, reply) {
   reply.send({ hello: "xxx" })
@@ -25,17 +28,16 @@ fastify.get('/backup', async (request, reply) => {
     const scriptPath = path.resolve('/opt/server-api/src/save.sh');
 
 // Execute the script
-    return await new Promise((resolve, reject) => {
+    return await new Promise ((resolve, reject) => {
       exec(`bash "${scriptPath}"`, { timeout: 60_000 }, (error, stdout, stderr) => {
         if (error) {
           // Log and reject on error
           fastify.log.error(error);
           return reject(reply.code(500).send({ error: 'Backup failed', details: stderr || error.message }));
         }
-//        resolve(reply.code(200).send({ message: 'Backup completed', output: stdout.trim() }));
-
 const nomFichier = 'datas.tar.gz';
 
+// POUR VERSION SEND FICHIER
   // Optionnel : Forcer le navigateur à télécharger le fichier plutôt qu'à essayer de l'ouvrir
   reply.header('Content-Disposition', `attachment; filename="${nomFichier}"`);
   
@@ -43,11 +45,14 @@ const nomFichier = 'datas.tar.gz';
   reply.type('application/gzip');
 
   // Envoyer le fichier (le chemin est relatif au dossier 'root' défini plus haut)
-  return reply.sendFile(nomFichier);
-// reply.send({ lien: "192.168.1.5:3002/opt/server-api/datas.tar.gz" });
+    return reply.sendFile(nomFichier);
+
+
+ //reply.send({ lien: "192.168.1.5:3002/opt/server-api/datas.tar.gz" });
 });
   });
-  } catch (err) {
+  } 
+  catch (err) {
     fastify.log.error(err);
     return reply.code(500).send({ error: 'Unexpected server error' });
   }

@@ -6,7 +6,7 @@ const path = require('path');
 const fastifyStatic = require('@fastify/static');
 const { fileURLToPath } = require('url');
 const HOST="0.0.0.0";
-const PORT= 3002;
+const PORT= 3004;
 
 
 // POUR VERSION SEND FICHIER
@@ -42,7 +42,7 @@ const nomFichier = 'datas.tar.gz';
   reply.header('Content-Disposition', `attachment; filename="${nomFichier}"`);
   
   // Définir le bon type MIME pour une archive .tar.gz
-  reply.type('application/gzip');
+  reply.type('application/json');
 
   // Envoyer le fichier (le chemin est relatif au dossier 'root' défini plus haut)
     return reply.sendFile(nomFichier);

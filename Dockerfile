@@ -7,6 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY --chown=node:node . .
 RUN npm install
+RUN mkdir -p /opt/server-api/backups
 RUN chown -R 1000:1000 /opt/server-api
 RUN chmod -R 666 /opt/server-api
 ## Crée un nouvel utilisateur appelé 'appuser' avec l'identifiant utilisateur 1000

@@ -2,30 +2,34 @@
 
 BACKUP_DIR="/opt/server-api/backups"
 BACKUP_DATAS_GLADYS="/var/lib/gladysassistant"
+BACKUP_DB="$BACKUP_DATAS_GLADYS"/gladys-production.db
+BACKUP_DUCKDB="$BACKUP_DATAS_GLADYS/gladys-production.duckdb"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 LOG_FILE="$BACKUP_DIR/backup.log"
-#chmod -R 775 "$BACKUP_DIR"
-# Create timestamp directory
-BACKUP_PATH="$BACKUP_DIR/$TIMESTAMP"
-mkdir -p "$BACKUP_PATH"
+
 echo "[$(date)] Starting Docker backup" >> "$LOG_FILE"
 
 # Backup container persistent datas gladys
-    echo "[$(date)] Exporting datas: $BACKUP_DATAS_GLADYS" >> "$LOG_FILE"
-    tar -cvzf "$BACKUP_DIR"/datas.tar.gz "$BACKUP_DATAS_GLADYS"  2>> "$LOG_FILE"
-    cp  "$BACKUP_DIR"/datas.tar.gz  "$BACKUP_PATH"/datas.tar.gz
+# Lorsque DuckDB ouvre la sauvegarde, il rejoue automatiquement le WAL. Cela vous donne l’état le plus récent.
+# Note : Cela ne fonctionne de manière fiable que si aucune écriture n’a lieu entre les deux opérations de copiage
+    echo "[$(date)] Exporting datas: ${BACKUP_DATAS_GLADYS}" >> $LOG_FILE
+# Cette transaction verrouille automatiquement la base de données pour l’écriture, mais permet des lectures simultanées    
+    sqlite3 "$BACKUP_DB" ".backup ${BACKUP_DIR}/bd-${TIMESTAMP}.db" 2>> "$LOG_FILE"
+    cp $BACKUP_DUCKDB "${BACKUP_DIR}/bdd-${TIMESTAMP}.duck" 2>/dev/null || true
+    cp "$BACKUP_DUCKDB.wal" "${BACKUP_DIR}/bdd-${TIMESTAMP}.duck.wal" 2>/dev/null || true
+ cd $BACKUP_DIR   
+    tar -cvzf datas.tar.gz bd-${TIMESTAMP}.db bdd-${TIMESTAMP}.duck bdd-${TIMESTAMP}.duck.wal  2>> "$LOG_FILE"
+    cp  datas.tar.gz  "bd_$TIMESTAMP".tar.gz
+   # rm  bd*
 # Compress backup directory
 echo "[$(date)] Compressing backup" >> "$LOG_FILE"
-cd "$BACKUP_DIR"
-tar czf "${TIMESTAMP}.tar.gz" "$TIMESTAMP"
-rm -rf "$TIMESTAMP"
 
 # Calculate size
-SIZE=$(du -sh "${TIMESTAMP}.tar.gz" | cut -f1)
+SIZE=$(du -sh "bd_${TIMESTAMP}.tar.gz" | cut -f1)
 echo "[$(date)] Backup completed. Size: $SIZE" >> "$LOG_FILE"
 
 # Keep only last 5 backups
-find "$BACKUP_DIR" -maxdepth 1 -name "*.tar.gz" -type f -mtime +5 -delete
+find "$BACKUP_DIR"  -name "bd_*.tar.gz" -type f -mtime +5 -delete
 
 # Verify backup
 ls -lh /opt/server-api/backups/

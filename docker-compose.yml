@@ -1,8 +1,8 @@
 services:
   api:
-    image: server:v2
+    image: server-api:v4
     ports:
-      - "3002:3002"
+      - "3004:3004"
     environment:
       - NODE_ENV=production
       - USER=root

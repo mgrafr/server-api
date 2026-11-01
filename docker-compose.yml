@@ -1,6 +1,6 @@
 services:
   api:
-    image: server-api:v4
+    image: server-api:v7
     ports:
       - "3004:3004"
     environment:

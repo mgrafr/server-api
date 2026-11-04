@@ -9,7 +9,7 @@ const fastifyMultipart = require('@fastify/multipart')
 const pump = require('pump')
 const { fileURLToPath } = require('url');
 const HOST="0.0.0.0";
-const PORT= 3004;
+const PORT= 3006;
 const traps = require('@dnlup/fastify-traps')
 const fs = require('fs')
 const SMB2 = require("samba-client"); // npm install smb2
@@ -113,7 +113,7 @@ const smbPath = path.join('\\', fileName);
       reply.code(500).send({ error: 'Failed to stream file' });
     });
 reply
-      .header('Content-Type', 'application/octet-stream')
+      //.header('Content-Type', 'application/octet-stream')
       .header('Content-Disposition', `attachment; filename="${fileName}"`);
 
     return reply.send(smbStream);
@@ -134,7 +134,7 @@ fastify.get('/', function (request, reply) {
 fastify.get('/backup_bd', async (request, reply) => {
   try {
     // Use an absolute, validated path to avoid command injection
-    const scriptPath = path.resolve('src/save.sh');
+    const scriptPath = path.resolve('/opt/server-api/src/save.sh');
 
 // Execute the script
     return await new Promise ((resolve, reject) => {
@@ -144,21 +144,25 @@ fastify.get('/backup_bd', async (request, reply) => {
           fastify.log.error(error);
           return reject(reply.code(500).send({ error: 'Backup failed', details: stderr || error.message }));
         }
-const nomFichier = 'datas.tar.gz';
-
+       
+      let nomFichier = fs.readFileSync('/opt/server-api/backups/sauvegarde.txt','utf8');
+      nomFichier =nomFichier.replace(/[\u200B-\u200D\u2060\uFEFF\u00AD]/g, '').replace(/[\u00A0\u202F\u2007]/g, ' ').trim()
+      console.log("sauvegarde="+nomFichier);
 // POUR VERSION SEND FICHIER
   // Optionnel : Forcer le navigateur à télécharger le fichier plutôt qu'à essayer de l'ouvrir
-  //reply.header('Content-Disposition', `attachment; filename="${nomFichier}"`);
+  reply.header('Content-Disposition', `attachment; filename="${nomFichier}"`);
 
-  // Définir le bon type MIME pour une archive .tar.gz
-  reply.type('application/json');
-  //const filePath = '/opt/server-api/backups/datas.tar.gz';
- // reply.send(fs.createReadStream(filePath)); //pour gladys
+  // Définir le bon type MIME pour une archive .tar.gz: gzip
+  reply.type('application/x-tar');
+  // --------------------------------------------------"-------------
+  const filePath = "/opt/server-api/backups/"+nomFichier;
+  reply.send(fs.createReadStream(filePath)); //pour gladys
+ // ------------------------------------------------------------------
   // Envoyer le fichier (le chemin est relatif au dossier 'root' défini plus haut)
-    //return reply.sendFile(nomFichier);
-
-
- reply.send({ lien: "curl.exe -F file=@C:\<Users\Downloads>\datas.tar.gz http://192.168.1.131:<PORT_SERVER-API>/upload" });
+ // return reply.sendFile(nomFichier);
+  //------------------------------------------------------------------
+// reply.type('application/json);
+ // reply.send({ lien: "curl.exe -F file=@C:\<Users\Downloads>\datas.tar.gz http://192.168.1.131:<PORT_SERVER-API>/upload" });
 });
   });
   }

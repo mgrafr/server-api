@@ -9,6 +9,8 @@ TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 LOG_FILE="$BACKUP_DIR/backup.log"
 
 echo "[$(date)] Starting Docker backup" >> "$LOG_FILE"
+rm "$BACKUP_DIR/bd_*"
+rm "$BACKUP_DIR/sauvegarde.txt"
 # Backup container persistent datas gladys
 # Lorsque DuckDB ouvre la sauvegarde, il rejoue automatiquement le WAL. Cela vous donne l’état le plus récent.
 # Note : Cela ne fonctionne de manière fiable que si aucune écriture n’a lieu entre les deux opérations de copiage

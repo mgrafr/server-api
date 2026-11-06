@@ -41,9 +41,13 @@ Ce serveur node js permet:
   - de télécharger des scripts exécutable depuis Gladys
   - 
  http://<ip>:3004/backup_bd // pour sauvegarder les bases de données
+
  http://<ip>:3004/upload_bd // pour televerser une sauvegarde pour la restaurer 
+ 
  http://<ip>:3004/restore_bd // pour restaurer les bases de données
+ 
  http://<ip>:3004/upload_script // pour televerser un script(bash,python)
+ 
  http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script
  
  INSTALLATION 

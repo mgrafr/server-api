@@ -19,16 +19,23 @@ http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 INSTALLATION
 Important: The installation must be performed on the server hosting Gladys Assistant.
 
-Using Git:
-`mkdir /opt/server-api & cd server-api`
-`git clone https://github.com/mgrafr/server-api.git`
+Using Git
+
+code-block::
+
+   mkdir /opt/server-api & cd server-api
+   git clone https://github.com/mgrafr/server-api.git
 
 Downloading server-api from GitHub:
-`https://github.com/mgrafr/server-api/archive/refs/heads/main.zip`
+
+https://github.com/mgrafr/server-api/archive/refs/heads/main.zip
 
 Using Docker:
-`docker pull ghcr.io/mgrafr/server-api:1.0.2 // github`
-`pull mgrafr/server-api:v7 // docker hub`
+
+code-bock::
+
+   docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
+   pull mgrafr/server-api:v7 // docker hub
 
 USING WITH GLADYS ASSISTANT
 

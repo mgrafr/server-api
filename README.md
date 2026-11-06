@@ -4,11 +4,15 @@ This Node.js server allows you to:
   - Back up GladysAssistant databases
   - Restore backed-up databases
   - Upload executable scripts from Gladys
-  - 
+   
 http://<ip>:3004/backup_bd // to back up databases
+
 http://<ip>:3004/upload_bd // to upload a backup for restoration
+
 http://<ip>:3004/restore_bd // to restore databases
+
 http://<ip>:3004/upload_script // to upload a script (bash,
+
 http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 
 

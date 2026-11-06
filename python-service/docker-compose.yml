@@ -1,0 +1,9 @@
+services:
+  python-service:
+    image: python:3.11-slim
+    container_name: python_service
+    volumes:
+      - ./scripts:/scripts
+    working_dir: /scripts
+    command: tail -f /dev/null  # Reste actif pour recevoir commandes
+    restart: unless-stopped

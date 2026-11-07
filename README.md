@@ -5,7 +5,7 @@ This Node.js server allows you to:
   - Restore backed-up databases
   - Upload executable scripts from Gladys
 
-## Structure du projet
+## Project Structure
 
 project/
  ├─ fastify/          # Code Fastify\
@@ -19,64 +19,74 @@ project/
  │   ├─ test.sh\
  ├─ docker-compose.yml\
 
- ##  Fonctionnalités\
+## Features
  
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
-- [ ] http://<ip>:3004/upload_bd // to upload a backup for restoration\
+- [ ] xxxxxxxxxx // to upload a backup for restoration\
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
-- [ ] http://<ip>:3004/upload_script // to upload a script (bash,,python)\
-- [X] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
+- [ ]xxxxxxxxxxx // to upload a script (bash,,python)\
+- [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 
-# Installation\
-Important: The installation must be performed on the server hosting Gladys Assistant.
+## Installation\
+**Important: The installation must be performed on the server hosting Gladys Assistant.**
 
-Using Git
+  **Using Git**\
+  *mkdir /opt/server-api & cd server-api*\
+  *git clone https://github.com/mgrafr/server-api.git*
 
-  :mkdir /opt/server-api & cd server-api
-  :git clone https://github.com/mgrafr/server-api.git
+  **Downloading server-api from GitHub:**
 
-Downloading server-api from GitHub:
+   *https://github.com/mgrafr/server-api/archive/refs/heads/main.zip*
 
-https://github.com/mgrafr/server-api/archive/refs/heads/main.zip
+  **Using Docker:**\
+   *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
+   *pull mgrafr/server-api:v7 // docker hub*
 
-Using Docker:
-
-:docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
-:pull mgrafr/server-api:v7 // docker hub
-
-USING WITH GLADYS ASSISTANT
+# Using Gladys assistant
 
 
 
-en français:
-Ce serveur node js permet:
-  - de sauvegarder les bases de données de GladysAssistant
-  - de restaurer les bases de données sauvegardées
+**en français:**
+Ce serveur node js permet:\
+  - de sauvegarder les bases de données de GladysAssistant\
+  - de restaurer les bases de données sauvegardées\
   - de télécharger des scripts exécutable depuis Gladys
   - 
- http://<ip>:3004/backup_bd // pour sauvegarder les bases de données
+## Structure du projet
 
- http://<ip>:3004/upload_bd // pour televerser une sauvegarde pour la restaurer 
+project/
+ ├─ fastify/          # Code Fastify\
+ │   ├─ server.js\
+ │   ├─ package.json\
+ ├─ python-service/   # API Python\
+ │   ├─ app.py\
+ │   ├─ requirements.txt\
+ ├─ scripts/          # Scripts externes (.py, .sh)\
+ │   ├─ test.py\
+ │   ├─ test.sh\
+ ├─ docker-compose.yml
  
- http://<ip>:3004/restore_bd // pour restaurer les bases de données
+ ##  Fonctionnalités
  
- http://<ip>:3004/upload_script // pour televerser un script(bash,python)
+ - [ ] http://<ip>:3004/backup_bd // pour sauvegarder les bases de données\
+ - [ ]xxxxxxxxxxxxxxx // pour televerser une sauvegarde pour la restaurer\ 
+ - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\
+ - [ ] xxxxxxxxxxxxxx // pour televerser un script(bash,python)
+ - [ ] http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script
  
- http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script
- 
- INSTALLATION 
- importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant 
+## Installation\
+ **importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant** 
 
- avec git
- :mkdir /opt/server-api & cd server-api
- :git clone https://github.com/mgrafr/server-api.git
+**avec git**\
+ - *mkdir /opt/server-api & cd server-api*\
+ - *git clone https://github.com/mgrafr/server-api.git*
 
- en téléchargent server-api depuis github
- :https://github.com/mgrafr/server-api/archive/refs/heads/main.zip
+ **en téléchargent server-api depuis github**\
+- *https://github.com/mgrafr/server-api/archive/refs/heads/main.zip*
 
- avec Docker
- :docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
- :pull mgrafr/server-api:v7 // docker hub
+ **avec Docker**\
+- *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
+- *pull mgrafr/server-api:v7 // docker hub
 
- UTILISATION AVEC GLADYS ASSISTANT
+ # Utilisation avec Gladys assistant
  

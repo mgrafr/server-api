@@ -5,28 +5,19 @@ This Node.js server allows you to:
   - Restore backed-up databases
   - Upload executable scripts from Gladys
 
-Structure du projet
+# Structure du projet
 
 project/
- ├─ fastify/          # Code Fastify<br>
- 
- │   ├─ server.js<br>
- 
- │   ├─ package.json<br>
- 
- ├─ python-service/   # API Python<br>
- 
- │   ├─ app.py<br>
- 
- │   ├─ requirements.txt<br>
- 
- ├─ scripts/          # Scripts externes (.py, .sh)<br>
- 
- │   ├─ test.py<br>
- 
- │   ├─ test.sh<br>
- 
- ├─ docker-compose.yml
+ ├─ fastify/          # Code Fastify\
+ │   ├─ server.js\
+ │   ├─ package.json\
+ ├─ python-service/   # API Python\
+ │   ├─ app.py\
+ │   ├─ requirements.txt\
+ ├─ scripts/          # Scripts externes (.py, .sh)\
+ │   ├─ test.py\
+ │   ├─ test.sh\
+ ├─ docker-compose.yml\
 
    
 http://<ip>:3004/backup_bd // to back up databases

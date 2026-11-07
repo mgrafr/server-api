@@ -1,11 +1,11 @@
-#Server node.js for API
+# Server node.js for API
 
 This Node.js server allows you to:
   - Back up GladysAssistant databases
   - Restore backed-up databases
   - Upload executable scripts from Gladys
 
-# Structure du projet
+## Structure du projet
 
 project/
  ├─ fastify/          # Code Fastify\
@@ -19,19 +19,15 @@ project/
  │   ├─ test.sh\
  ├─ docker-compose.yml\
 
-   
-http://<ip>:3004/backup_bd // to back up databases
-
-http://<ip>:3004/upload_bd // to upload a backup for restoration
-
-http://<ip>:3004/restore_bd // to restore databases
-
-http://<ip>:3004/upload_script // to upload a script (bash,
-
+ ## Appeler l'api 
+ 
+http://<ip>:3004/backup_bd // to back up databases\
+http://<ip>:3004/upload_bd // to upload a backup for restoration\
+http://<ip>:3004/restore_bd // to restore databases\
+http://<ip>:3004/upload_script // to upload a script (bash,,python)\
 http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 
-
-INSTALLATION
+# INSTALLATION
 Important: The installation must be performed on the server hosting Gladys Assistant.
 
 Using Git

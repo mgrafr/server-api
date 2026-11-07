@@ -1,4 +1,4 @@
-Server node.js for API
+#Server node.js for API
 
 This Node.js server allows you to:
   - Back up GladysAssistant databases
@@ -8,11 +8,11 @@ This Node.js server allows you to:
 Structure du projet
 
 project/
- ├─ fastify/          # Code Fastify
+ ├─ fastify/          # Code Fastify\n
  
- │   ├─ server.js
+ │   ├─ server.js\n
  
- │   ├─ package.json
+ │   ├─ package.json\n
  
  ├─ python-service/   # API Python
  

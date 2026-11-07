@@ -9,14 +9,23 @@ Structure du projet
 
 project/
  ├─ fastify/          # Code Fastify
+ 
  │   ├─ server.js
+ 
  │   ├─ package.json
+ 
  ├─ python-service/   # API Python
+ 
  │   ├─ app.py
+ 
  │   ├─ requirements.txt
+ 
  ├─ scripts/          # Scripts externes (.py, .sh)
+ 
  │   ├─ test.py
+ 
  │   ├─ test.sh
+ 
  ├─ docker-compose.yml
 
    

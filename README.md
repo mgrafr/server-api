@@ -21,11 +21,11 @@ project/
 
  ##  Fonctionnalités\
  
-[  ]http://<ip>:3004/backup_bd // to back up databases\
-[ ] http://<ip>:3004/upload_bd // to upload a backup for restoration\
-[ ] http://<ip>:3004/restore_bd // to restore databases\
-[ ] http://<ip>:3004/upload_script // to upload a script (bash,,python)\
-[X] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
+- [ ] http://<ip>:3004/backup_bd // to back up databases\
+- [ ] http://<ip>:3004/upload_bd // to upload a backup for restoration\
+- [ ] http://<ip>:3004/restore_bd // to restore databases\
+- [ ] http://<ip>:3004/upload_script // to upload a script (bash,,python)\
+- [X] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 
 # Installation\
 Important: The installation must be performed on the server hosting Gladys Assistant.

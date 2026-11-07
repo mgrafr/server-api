@@ -8,23 +8,23 @@ This Node.js server allows you to:
 Structure du projet
 
 project/
- ├─ fastify/          # Code Fastify\n
+ ├─ fastify/          # Code Fastify<br>
  
- │   ├─ server.js\n
+ │   ├─ server.js<br>
  
- │   ├─ package.json\n
+ │   ├─ package.json<br>
  
- ├─ python-service/   # API Python
+ ├─ python-service/   # API Python<br>
  
- │   ├─ app.py
+ │   ├─ app.py<br>
  
- │   ├─ requirements.txt
+ │   ├─ requirements.txt<br>
  
- ├─ scripts/          # Scripts externes (.py, .sh)
+ ├─ scripts/          # Scripts externes (.py, .sh)<br>
  
- │   ├─ test.py
+ │   ├─ test.py<br>
  
- │   ├─ test.sh
+ │   ├─ test.sh<br>
  
  ├─ docker-compose.yml
 

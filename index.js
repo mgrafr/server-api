@@ -9,19 +9,10 @@ const fastifyMultipart = require('@fastify/multipart')
 const pump = require('pump')
 const { fileURLToPath } = require('url');
 const HOST="0.0.0.0";
-const PORT= 3006;
+const PORT= 3004;
 const traps = require('@dnlup/fastify-traps')
 const fs = require('fs')
-const SMB2 = require("samba-client"); // npm install smb2
-
-// Configuration SMB2
-let smbClient = new SMB2({
-  address: '//192.168.1.35/Backup', // Nom du serveur et du partage SMB
-  domain: 'WORKGROUP',         // Domaine ou WORKGROUP
-  username: 'michel',         // Nom d'utilisateur SMB
-  password: 'Idem4546'   // Mot de passe SMB
-  // port: 445                   // Port SMB2 (par défaut 445)
-});
+const fsPromises = require('fs').promises;
 
 // Register multipart plugin for file uploads
 fastify.register(require('@fastify/multipart'));
@@ -36,7 +27,7 @@ fastify.register(fastifyStatic, {
   prefix: '/opt/server-api/backups/', // Optionnel : préfixe pour vos URL (ex: /public/mon-fichier.pdf)
 });
 
-fastify.post('/upload', async function (req, reply) {
+fastify.post('/upload_bd', async function (req, reply) {
   // return the first file submitted, regardless the field name
   const data = await req.file()
   // data.file // stream
@@ -63,67 +54,21 @@ fastify.post('/upload', async function (req, reply) {
   }    
 })
 
-
-
-// Route pour lister les fichiers d'un dossier SMB2
-fastify.get('/list_samba', async (request, reply) => {
+fastify.post('/upload_script', async function (req, reply) {
+  const data = await req.file()
+  const uploadPath = path.join(process.cwd(), 'scripts', data.filename)
+  const writeStream = fs.createWriteStream(uploadPath)
   try {
-    await smbClient.mkdir('essai');
-    //const files = await new Promise((resolve, reject) => {
-      //smbClient.readdir('\\', (err, list) => {
-        //if (err) return reject(err);
-        //console.log(list);
-        //resolve({ success: true, list });
-        //resolve(list);
-        //for (let i = 0; i < list.length; i++){
-        //    console.log(list[i]);
-        //}
-      //});
-    //});
-// Générer une page HTML simple avec liens de téléchargement
-//    let html = `<h1>Liste des fichiers SMB2</h1><ul>`;
-//    files.forEach(file => {
-//      html += `<li><a href="/file/${encodeURIComponent(file)}">${file}</a></li>`;
-//    });
-//html += `</ul>`;
-//    reply.type('text/html').send(html);
-
+  await pump(data.file, writeStream)
+  return { 
+      message: 'Fichier enregistré avec succès',
+      filename: data.filename 
+   }
   } catch (err) {
-    fastify.log.error(err);
-    reply.code(500).send({ error: 'Failed to list files' });
-  }
-});
-
-
-// Route pour streamer un fichier SMB2
-fastify.get('/file/:name', async (request, reply) => {
-  try {
-    const fileName = request.params.name;
-
-    // Sécurité : empêcher les chemins relatifs dangereux
-    if (fileName.includes('..')) {
-      return reply.code(400).send({ error: 'Invalid file name' });
-    }
-const smbPath = path.join('\\', fileName);
-
-    const smbStream = smbClient.createReadStream(smbPath);
-
-    smbStream.on('error', (err) => {
-      fastify.log.error(err);
-      reply.code(500).send({ error: 'Failed to stream file' });
-    });
-reply
-      //.header('Content-Type', 'application/octet-stream')
-      .header('Content-Disposition', `attachment; filename="${fileName}"`);
-
-    return reply.send(smbStream);
-  } catch (err) {
-    fastify.log.error(err);
-    reply.code(500).send({ error: 'Unexpected error' });
-  }
-});
-
-
+    fastify.log.error(err)
+    return reply.code(500).send({ error: "Erreur lors de l'enregistrement du fichier" })
+  }    
+})
 
 fastify.get('/', function (request, reply) {
   reply
@@ -197,26 +142,61 @@ fastify.get('/restore_bd', async (request, reply) => {
   }
 });
 
-fastify.get('/script/:interpreteur/:name', function (request, reply) {
-  // curl ${app-url}/example/12345
-  // userId === '12345'
+fastify.get('/script/:file',async (request, reply) => {
+ 
    try {
-  const { interpreteur,name } = res.params;
-    if (!interpreteur || !name) {
-            return res.status(400).json({ error: 'Missing required parameters.' });
+    let { file } = request.params;
+    let arg = ""
+    var arr =  file.split(" "); file = arr[0]
+    const nbEl = arr.length;
+    if (nbEl>1) {arg = arr[1]}
+      const scriptPath = path.resolve('/opt/server-api/scripts/'+file);
+    let ext_fich = file.split('.').pop();
+    if (ext_fich=='py') {ext_fich='python3'}
+    if (ext_fich=='sh') {ext_fich='sh'}
+   console.log(ext_fich); 
+   if (!fs.existsSync(path.join(__dirname, '/scripts', file))) {
+      return reply.send({ erreur: "fichier absent" });
+    }
+    await fsPromises.chmod(path.join(__dirname, '/scripts', file), 0o755);
+    console.log(scriptPath);
+/*// Execute the script
+    return await new Promise ((resolve, reject) => {
+      exec(` "${ext_fich}" "${scriptPath}" "${arg}"`, { timeout: 60_000 }, (error, stdout, stderr) => {
+        if (error) {
+          // Log and reject on error
+          fastify.log.error(error);
+          return reject(reply.code(500).send({ error: 'script failed', details: stderr || error.message }));
         }
-      // Respond with extracted parameters
-        res.json({
-            message: 'Parameters received successfully.',
-            interpreteur: interpreteur,
-            name: name
-        });  
+        if (stderr) {
+        console.error(`Erreur Python : ${stderr}`);
+        return;
+        }
+    console.log(`Résultat de Python : ${stdout.trim()}`);
+   
+     return reply.send(`Résultat de Python : ${stdout.trim()}`);
+   
+      })
+    })*/
+  
+    // Exécute le script dans le conteneur python-service
+    return await new Promise((resolve, reject) => {
+      exec(`docker exec python_service ${ext_fich} "${scriptPath}"`, { timeout: 60_000 }, (error, stdout, stderr) => {
+        if (error) {
+          fastify.log.error(error);
+          return reject(reply.code(500).send({ error: 'script failed', details: stderr || error.message }));
+        }
+        resolve({ output: stdout.trim() });
+      });
+    });
+
+
   } catch (err) {
         console.error('Error handling request:', err);
-        res.status(500).json({ error: 'Internal server error.' });
+       // request.status(500).json({ error: 'Internal server error.' });
     }        
 
-})
+});
 
 fastify.register(traps, {
   timeout: 5000 // wait 5 second before forcing exiting

@@ -4,6 +4,21 @@ This Node.js server allows you to:
   - Back up GladysAssistant databases
   - Restore backed-up databases
   - Upload executable scripts from Gladys
+
+Structure du projet
+
+project/
+ ├─ fastify/          # Code Fastify
+ │   ├─ server.js
+ │   ├─ package.json
+ ├─ python-service/   # API Python
+ │   ├─ app.py
+ │   ├─ requirements.txt
+ ├─ scripts/          # Scripts externes (.py, .sh)
+ │   ├─ test.py
+ │   ├─ test.sh
+ ├─ docker-compose.yml
+
    
 http://<ip>:3004/backup_bd // to back up databases
 
@@ -21,10 +36,8 @@ Important: The installation must be performed on the server hosting Gladys Assis
 
 Using Git
 
-code-block::
-
-   mkdir /opt/server-api & cd server-api
-   git clone https://github.com/mgrafr/server-api.git
+  :mkdir /opt/server-api & cd server-api
+  :git clone https://github.com/mgrafr/server-api.git
 
 Downloading server-api from GitHub:
 
@@ -32,10 +45,8 @@ https://github.com/mgrafr/server-api/archive/refs/heads/main.zip
 
 Using Docker:
 
-code-bock::
-
-   docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
-   pull mgrafr/server-api:v7 // docker hub
+:docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
+:pull mgrafr/server-api:v7 // docker hub
 
 USING WITH GLADYS ASSISTANT
 
@@ -61,15 +72,15 @@ Ce serveur node js permet:
  importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant 
 
  avec git
- mkdir /opt/server-api & cd server-api
- git clone https://github.com/mgrafr/server-api.git
+ :mkdir /opt/server-api & cd server-api
+ :git clone https://github.com/mgrafr/server-api.git
 
  en téléchargent server-api depuis github
- https://github.com/mgrafr/server-api/archive/refs/heads/main.zip
+ :https://github.com/mgrafr/server-api/archive/refs/heads/main.zip
 
  avec Docker
- docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
- pull mgrafr/server-api:v7 // docker hub
+ :docker pull ghcr.io/mgrafr/server-api:1.0.2 // github
+ :pull mgrafr/server-api:v7 // docker hub
 
  UTILISATION AVEC GLADYS ASSISTANT
  

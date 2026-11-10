@@ -11,7 +11,7 @@ project/
  ├─ fastify/          # Code Fastify\
  │   ├─ server.js\
  │   ├─ package.json\
- ├─ python-service/   # API Python\
+ ├─ python-service/   # API Python (Container Docker)\ 
  │   ├─ app.py\
  │   ├─ requirements.txt\
  ├─ scripts/          # Scripts externes (.py, .sh)\
@@ -22,7 +22,7 @@ project/
 ## Features
  
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
-- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://192.168.1.131:3004//upload_script/<FILE>\
+- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
       // To upload a file (backup for restoration or .py & .sh file for execution)
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
 - [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
@@ -58,7 +58,7 @@ project/
  ├─ fastify/          # Code Fastify\
  │   ├─ server.js\
  │   ├─ package.json\
- ├─ python-service/   # API Python\
+ ├─ python-service/   # API Python (Conteneur Docker) \
  │   ├─ app.py\
  │   ├─ requirements.txt\
  ├─ scripts/          # Scripts externes (.py, .sh)\
@@ -69,7 +69,7 @@ project/
  ##  Fonctionnalités
  
  - [ ] http://<ip>:3004/backup_bd // pour sauvegarder les bases de données\
-- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://192.168.1.131:3004//upload_script/<FILE>\
+- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
      // Pour téléverser un fichier (sauvegarde pour restauration ou fichier.py & sh pour exécution)
  - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\
  - [ ] http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script

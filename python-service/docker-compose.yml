@@ -2,9 +2,13 @@ services:
   python-service:
     image: mgrafr/python-service:v1
     container_name: python_service
+    ports:
+      - "5004:5004"
+    environment:
+      - PYTHONUNBUFFERED=1
     volumes:
       - /opt/server-api/scripts:/opt/server-api/scripts
-      - /opt/server-api//data:/opt/server-api/data
-    working_dir: /opt/server-api/scripts
-    command: tail -f /dev/null  # Reste actif pour recevoir commandes
+      - /opt/server-api/data:/opt/server-api/data
+    working_dir: /app
+    command: python app.py
     restart: unless-stopped

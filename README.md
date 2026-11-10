@@ -22,9 +22,9 @@ project/
 ## Features
  
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
-- [ ] xxxxxxxxxx // to upload a backup for restoration\
+- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://192.168.1.131:3004//upload_script/<FILE>\
+      // To upload a file (backup for restoration or .py & .sh file for execution)
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
-- [ ]xxxxxxxxxxx // to upload a script (bash,,python)\
 - [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 
 ## Installation\
@@ -69,9 +69,9 @@ project/
  ##  Fonctionnalités
  
  - [ ] http://<ip>:3004/backup_bd // pour sauvegarder les bases de données\
- - [ ]xxxxxxxxxxxxxxx // pour televerser une sauvegarde pour la restaurer\ 
+- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://192.168.1.131:3004//upload_script/<FILE>\
+     // Pour téléverser un fichier (sauvegarde pour restauration ou fichier.py & sh pour exécution)
  - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\
- - [ ] xxxxxxxxxxxxxx // pour televerser un script(bash,python)
  - [ ] http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script
  
 ## Installation\

@@ -1,6 +1,5 @@
 
 FROM node:24-alpine
-LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api
 RUN apk update && apk add bash  --no-cache bash nodejs npm sqlite
 
 RUN  mkdir -p /opt/server-api/backups &  mkdir -p /opt/server-api/data & mkdir -p /opt/server-api/uploads

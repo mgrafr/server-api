@@ -11,7 +11,7 @@ project/
  ├─ fastify/          # Code Fastify\
  │   ├─ server.js\
  │   ├─ package.json\
- ├─ python-service   # API Python (Container Docker)\ 
+ ├─ python-service/  # API Python (Container Docker)\ 
  │   ├─ app.py\
  │   ├─ requirements.txt\
  ├─ scripts/          # Scripts externes (.py, .sh)\

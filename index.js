@@ -144,14 +144,9 @@ fastify.get('/restore_bd', async (request, reply) => {
 fastify.get('/script/:file', async (request, reply) => {
   try {
     const { file } = request.params;
-    //const form = new FormData();
-    //  form.append("file", { file });
-    const response = await axios.post('http://nodejs:5004/run', { file } );
-  //  const response = await axios.post('http://nodejs:5004/');  //pour essai
-    
-   return response.data;
-   
-  } catch (err) {
+    const response = await axios.post('http://127.0.0.1:5004/run', { file } );
+    return response.data;
+   } catch (err) {
     fastify.log.error(err);
     return reply.code(500).send({ error: 'Failed to run script', details: err.message });
   }

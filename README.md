@@ -40,7 +40,9 @@ project\
 
   **Using Docker:**\
    *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
-   *pull mgrafr/server-api:v7 // docker hub*
+   *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\ 
+   *pull mgrafr/server-api:v8 // docker hub*\
+   *pull mgrafr/python-service:v2 // docker hub*\
 
 # Using Gladys assistant
 
@@ -86,7 +88,10 @@ project\
 
  **avec Docker**\
 - *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
-- *pull mgrafr/server-api:v7 // docker hub
+- *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\ 
+- *pull mgrafr/server-api:v8 // docker hub*\
+- *pull mgrafr/python-service:v2 // docker hub*\
+
 
  # Utilisation avec Gladys assistant
  

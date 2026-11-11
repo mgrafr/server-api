@@ -31,8 +31,9 @@ project\
 **Important: The installation must be performed on the server hosting Gladys Assistant.**
 
   **Using Git**\
-  *mkdir /opt/server-api & cd server-api*\
-  *git clone https://github.com/mgrafr/server-api.git*
+  *cd /opt*\
+  *git clone https://github.com/mgrafr/server-api.git* \
+  *cd server-api*
 
   **Downloading server-api from GitHub:**
 
@@ -83,9 +84,10 @@ project\
  **importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant** 
 
 **avec git**\
- - *mkdir /opt/server-api & cd server-api*\
- - *git clone https://github.com/mgrafr/server-api.git*
-
+ *cd /opt*\
+ *git clone https://github.com/mgrafr/server-api.git* \
+ *cd server-api*
+  
  **en téléchargent server-api depuis github**\
 - *https://github.com/mgrafr/server-api/archive/refs/heads/main.zip*
 

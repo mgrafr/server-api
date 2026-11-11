@@ -23,7 +23,7 @@ project\
  
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
 - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-      // To upload a file (backup for restoration or .py & .sh file for execution)
+      // To upload a file (backup for restoration or .py & .sh file for execution)\
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
 - [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script
 
@@ -31,8 +31,9 @@ project\
 **Important: The installation must be performed on the server hosting Gladys Assistant.**
 
   **Using Git**\
-  *mkdir /opt/server-api & cd server-api*\
-  *git clone https://github.com/mgrafr/server-api.git*
+  *cd /opt*\
+  *git clone https://github.com/mgrafr/server-api.git* \
+  *cd server-api*
 
   **Downloading server-api from GitHub:**
 
@@ -40,7 +41,12 @@ project\
 
   **Using Docker:**\
    *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
-   *pull mgrafr/server-api:v7 // docker hub*
+   *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\
+   *pull mgrafr/server-api:v8 // docker hub*\
+   *pull mgrafr/python-service:v2 // docker hub*
+
+  **Docker compose** 
+  - *server-api-compose.yml*
 
 # Using Gladys assistant
 
@@ -78,15 +84,21 @@ project\
  **importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant** 
 
 **avec git**\
- - *mkdir /opt/server-api & cd server-api*\
- - *git clone https://github.com/mgrafr/server-api.git*
-
+ *cd /opt*\
+ *git clone https://github.com/mgrafr/server-api.git* \
+ *cd server-api*
+  
  **en téléchargent server-api depuis github**\
 - *https://github.com/mgrafr/server-api/archive/refs/heads/main.zip*
 
  **avec Docker**\
 - *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
-- *pull mgrafr/server-api:v7 // docker hub
+- *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\ 
+- *pull mgrafr/server-api:v8 // docker hub*\
+- *pull mgrafr/python-service:v2 // docker hub*\
+
+ **Docker compose** 
+ - *server-api-compose.yml*
 
  # Utilisation avec Gladys assistant
  

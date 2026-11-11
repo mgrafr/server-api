@@ -1,6 +1,6 @@
 services:
   python-service:
-    image: mgrafr/python-service:v1
+    image: mgrafr/python-service:v2
     container_name: python_service
     ports:
       - "5004:5004"

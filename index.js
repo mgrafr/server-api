@@ -13,7 +13,7 @@ const PORT= 3004;
 const traps = require('@dnlup/fastify-traps')
 const fs = require('fs')
 const fsPromises = require('fs').promises;
-
+const axios = require('axios');
 // Register multipart plugin for file uploads
 fastify.register(require('@fastify/multipart'));
 
@@ -141,61 +141,15 @@ fastify.get('/restore_bd', async (request, reply) => {
     return reply.code(500).send({ error: 'Unexpected server error' });
   }
 });
-
-fastify.get('/script/:file',async (request, reply) => {
- 
-   try {
-    let { file } = request.params;
-    let arg = ""
-    var arr =  file.split(" "); file = arr[0]
-    const nbEl = arr.length;
-    if (nbEl>1) {arg = arr[1]}
-      const scriptPath = path.resolve('/opt/server-api/scripts/'+file);
-    let ext_fich = file.split('.').pop();
-    if (ext_fich=='py') {ext_fich='python3'}
-    if (ext_fich=='sh') {ext_fich='sh'}
-   console.log(ext_fich); 
-   if (!fs.existsSync(path.join(__dirname, '/scripts', file))) {
-      return reply.send({ erreur: "fichier absent" });
-    }
-    await fsPromises.chmod(path.join(__dirname, '/scripts', file), 0o755);
-    console.log(scriptPath);
-/*// Execute the script
-    return await new Promise ((resolve, reject) => {
-      exec(` "${ext_fich}" "${scriptPath}" "${arg}"`, { timeout: 60_000 }, (error, stdout, stderr) => {
-        if (error) {
-          // Log and reject on error
-          fastify.log.error(error);
-          return reject(reply.code(500).send({ error: 'script failed', details: stderr || error.message }));
-        }
-        if (stderr) {
-        console.error(`Erreur Python : ${stderr}`);
-        return;
-        }
-    console.log(`Résultat de Python : ${stdout.trim()}`);
-   
-     return reply.send(`Résultat de Python : ${stdout.trim()}`);
-   
-      })
-    })*/
-  
-    // Exécute le script dans le conteneur python-service
-    return await new Promise((resolve, reject) => {
-      exec(`docker exec python_service ${ext_fich} "${scriptPath}"`, { timeout: 60_000 }, (error, stdout, stderr) => {
-        if (error) {
-          fastify.log.error(error);
-          return reject(reply.code(500).send({ error: 'script failed', details: stderr || error.message }));
-        }
-        resolve({ output: stdout.trim() });
-      });
-    });
-
-
-  } catch (err) {
-        console.error('Error handling request:', err);
-       // request.status(500).json({ error: 'Internal server error.' });
-    }        
-
+fastify.get('/script/:file', async (request, reply) => {
+  try {
+    const { file } = request.params;
+    const response = await axios.post('http://127.0.0.1:5004/run', { file } );
+    return response.data;
+   } catch (err) {
+    fastify.log.error(err);
+    return reply.code(500).send({ error: 'Failed to run script', details: err.message });
+  }
 });
 
 fastify.register(traps, {

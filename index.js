@@ -144,7 +144,7 @@ fastify.get('/restore_bd', async (request, reply) => {
 fastify.get('/script/:file', async (request, reply) => {
   try {
     const { file } = request.params;
-    const response = await axios.post('http://127.0.0.1:5004/run', { file } );
+    const response = await axios.post('http://python-service:5004/run', { file } );
     return response.data;
    } catch (err) {
     fastify.log.error(err);

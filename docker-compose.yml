@@ -1,6 +1,6 @@
 services:
   api:
-    image: mgrafr/server-api:v7
+    image: mgrafr/server-api:v8
     ports:
       - "3004:3004"
     environment:

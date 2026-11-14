@@ -1,4 +1,3 @@
-
 const Fastify = require('fastify');
 const fastify = Fastify({ logger: true });
 const { exec } = require('child_process');
@@ -14,6 +13,7 @@ const traps = require('@dnlup/fastify-traps')
 const fs = require('fs')
 const fsPromises = require('fs').promises;
 const axios = require('axios');
+
 // Register multipart plugin for file uploads
 fastify.register(require('@fastify/multipart'));
 
@@ -69,6 +69,36 @@ fastify.post('/upload_script', async function (req, reply) {
     return reply.code(500).send({ error: "Erreur lors de l'enregistrement du fichier" })
   }    
 })
+
+fastify.get('/add_mod_py/:texte', async (request, reply) => {
+  const { texte } = request.params;
+
+  if (!texte) {
+    return reply.code(400).send({ erreur: 'Le nom du module Python est requis.' });
+  }
+  // Chemin vers le fichier requirements.txt
+  const uploadMod = path.join(process.cwd(), 'python-service', 'requirements.txt');
+  // Ajout du retour à la ligne (\n) à la fin du texte
+  const newMod = `${texte}\n`;
+  try {
+    const content  = fs.readFileSync(uploadMod, 'utf8');
+    const exists = content.includes(texte);
+    if (exists) { return  {info: `Le module "${texte}" est déjà présent dans le fichier.`} }
+    else {
+      await fsPromises.appendFile(uploadMod, newMod, 'utf8');
+      return { succes: true, message: 'Module "' + texte +'" ajouté avec succès.' };
+      }   
+    } catch (err) {
+    request.log.error(err);
+    return reply.code(500).send({ erreur: 'Impossible d\'écrire dans le fichier.' });
+      }
+    });
+
+
+
+
+
+
 
 fastify.get('/', function (request, reply) {
   reply

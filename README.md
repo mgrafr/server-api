@@ -28,7 +28,9 @@ project\
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
 - [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script\
       // If an argument is composed of several words, it must be surrounded by quotation marks\
-      // so that The shell considers it as a single argument.
+      // so that The shell considers it as a single argument.\
+ - [ ] http://<ip>:3004/add_mod_py<MODULE PYTHON NAME> // to add a module to requirements.txt\
+      // note: if the installation is done under Docker
 
 ## Installation & execution
 **Important: The installation must be performed on the server hosting Gladys Assistant.**
@@ -88,8 +90,10 @@ project\
  - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\
  - [ ] http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script\
        // si un argument est composé de plusieurs mots il faut l’entourer de guillemets pour que\
-       // le shell le considère comme un seul argument.
- 
+       // le shell le considère comme un seul argument.\
+  - [ ] http://<ip>:3004/add_mod_py<NOM DU MODULE PYTHON> // pour ajouter un module à requirements.txt\
+       // note : si l'installation est effectuée sous Docker
+  
 ## Installation & exécution
  **importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant** 
 

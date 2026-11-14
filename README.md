@@ -24,6 +24,7 @@ project\
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
 - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
       // To upload a file (backup for restoration or .py & .sh file for execution)\
+      ![Screenshot.](/assets/upload.webp)
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
 - [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script\
       // If an argument is composed of several words, it must be surrounded by quotation marks\

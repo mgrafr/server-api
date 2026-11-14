@@ -9,15 +9,15 @@ This Node.js server allows you to:
 
 project\
  ├─ server-api *fastify*/          # Code Fastify\
- │   ├─ server.js\
+ │   ├─ index.js\
  │   ├─ package.json\
- ├─ python-service/  # API Python (Container Docker)\
+ ├─ python-service/  # API Python \
  │   ├─ app.py\
  │   ├─ requirements.txt\
  ├─ scripts/          # Scripts externes (.py, .sh)\
  │   ├─ test.py\
  │   ├─ test.sh\
- ├─ docker-compose.yml\
+ ├─ server-compose.yml # start server-api & python-service\
 
 ## Features
  

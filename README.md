@@ -38,20 +38,22 @@ project\
   *cd server-api*
   *node index.js*
 
-  **Downloading server-api from GitHub:**
-
-   *https://github.com/mgrafr/server-api/archive/refs/heads/main.zip*
-
+  **Downloading server-api from GitHub**\
+  - *cd /opt*\
+  - *wget "https:\/\/github.com/mgrafr/server-api/archive/refs/heads/main.zip"*
+  - *unzip main.zip*
+  - *mv server-api-main server-api*
+  - 
   **Using Docker:**\
-   *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
-   *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\
-   or at docker.io\
-   *pull mgrafr/server-api:v8 // docker hub*\
-   *pull mgrafr/python-service:v2 // docker hub*\
-   execution:\
-   *cd /opt/server-api*\
-   *wget "https:\/\/github.com/mgrafr/server-api/blob/dev/server-api-compose.yml"*\
-   *docker compose -f server-api-compose up-build -d*\
+  - *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*
+  - *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\
+   or at docker.io
+  - *pull mgrafr/server-api:v8 // docker hub*
+  - *pull mgrafr/python-service:v2 // docker hub*\
+   execution:
+  - *cd /opt/server-api*
+  - *wget "https:\/\/github.com/mgrafr/server-api/blob/dev/server-api-compose.yml"*
+  - *docker compose -f server-api-compose up-build -d*
   
 # Using Gladys assistant
 
@@ -93,23 +95,24 @@ project\
 **avec git**\
  *cd /opt*\
  *git clone https://github.com/mgrafr/server-api.git* \
- *cd server-api*
-  
+ *cd server-api*\
+ *node index.js // démarrage de server-api*
+ 
  **en téléchargent server-api depuis github**\
-- *cd /opt*\
+- *cd /opt*
 - *wget "https:\/\/github.com/mgrafr/server-api/archive/refs/heads/main.zip"*
 - *unzip main.zip*
 - *mv server-api-main server-api*
 
  **avec Docker**\
-- *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*\
+- *docker pull ghcr.io/mgrafr/server-api:1.0.2 // github*
 - *docker pull ghcr.io/mgrafr/python-service:1.0.2 // github*\
-- ou chez docker.io
-- *pull mgrafr/server-api:v8 // docker hub*\
+  ou chez docker.io
+- *pull mgrafr/server-api:v8 // docker hub*
 - *pull mgrafr/python-service:v2 // docker hub*
-- *cd /opt/server-api*\
-- *wget https:\/\/github.com/mgrafr/server-api/blob/dev/server-api-compose.yml*\
-- *docker compose -f server-api-compose up-build -d*\
+- *cd /opt/server-api*
+- *wget https:\/\/github.com/mgrafr/server-api/blob/dev/server-api-compose.yml*
+- *docker compose -f server-api-compose up-build -d*
   
  # Utilisation avec Gladys assistant
  

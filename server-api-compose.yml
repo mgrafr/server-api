@@ -27,6 +27,12 @@ services:
     volumes:
       - /opt/server-api/scripts:/opt/server-api/scripts
       - /opt/server-api/data:/opt/server-api/data
+      - .:/app # Monte le code et requirements.txt
+      - python_packages:/usr/local/lib/python3.12/site-packages # Garde les paquets en cache
     working_dir: /app
-    command: python app.py
+    command: >
+      sh -c "pip install --no-cache-dir --break-system-packages -r requirements.txt & python app.py"
     restart: unless-stopped
+
+volumes:
+  python_packages:

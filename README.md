@@ -11,19 +11,25 @@ project\
  ├─ server-api *fastify*/          # Code Fastify\
  │   ├─ index.js\
  │   ├─ package.json\
- ├─ python-service/  # API Python \
+ ├─ python-service/  # API Python (container docker) \
  │   ├─ app.py\
  │   ├─ requirements.txt\
- ├─ scripts/          # Scripts externes (.py, .sh)\
+ ├─ lua   # Serveur LUA (Only Container Docker) \
+ │   ├─ file.lua (file containing the Lua script)\
+ ├─ scripts     External scripts (.py, .sh, .lua)\
  │   ├─ test.py\
  │   ├─ test.sh\
- ├─ server-compose.yml # start server-api & python-service\
+ │   ├─ main.lua\
+ ├─ server-api-compose.yml
+ 
 
 ## Features
  
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
 - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-      // To upload a file (backup for restoration or .py & .sh file for execution)\
+      // To upload a file (.py & .sh file for execution)\
+   [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_bd/<FILE>\
+      // To upload a backup (backup db for restoration )\   
       ![Screenshot.](/assets/upload.webp)
 - [ ] http://<ip>:3004/restore_bd // to restore databases\
 - [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script\
@@ -74,19 +80,24 @@ project\
  ├─ server-api *fastify*          # Code Fastify\
  │   ├─ server.js\
  │   ├─ package.json\
- ├─ python-service/   # API Python (Conteneur Docker) \
+ ├─ python-service   # API Python (Conteneur Docker) \
  │   ├─ app.py\
  │   ├─ requirements.txt\
- ├─ scripts/          # Scripts externes (.py, .sh)\
+ ├─ lua   # Serveur LUA (Seulement Conteneur Docker) \
+ │   ├─ file.lua    (fichier contenant le script lua)\
+ ├─ scripts         Scripts externes (.py, .sh, .lua)\
  │   ├─ test.py\
  │   ├─ test.sh\
- ├─ docker-compose.yml
+ │   ├─ main.lua\
+ ├─ server-api-compose.yml
  
  ##  Fonctionnalités
  
  - [ ] http://<ip>:3004/backup_bd // pour sauvegarder les bases de données\
-- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-     // Pour téléverser un fichier (sauvegarde pour restauration ou fichier.py & sh pour exécution)
+ - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
+     // Pour téléverser un fichier (fichier.py & sh pour exécution)
+ - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
+      // Pour téléverser une sauvegarde (sauvegarde de BD pour restauration)\
  - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\
  - [ ] http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script\
        // si un argument est composé de plusieurs mots il faut l’entourer de guillemets pour que\
@@ -95,7 +106,8 @@ project\
        // note : si l'installation est effectuée sous Docker
   
 ## Installation & exécution
- **importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant** 
+ **importannt:l’installation doit être faite sur le serveur hebergeant Gladys assitant** \
+ *Running Lua scripts is only possible after installing the "docker-lua" container*
 
 **avec git**\
  *cd /opt*\

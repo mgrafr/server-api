@@ -1,0 +1,11 @@
+
+services:
+  lua:
+    image: mhndev/docker-lua:latest  # Image avec Lua + Luarocks
+    container_name: lua_dev
+    working_dir: /app                # Répertoire de travail dans le conteneur
+    volumes:
+      - ./app:/app                   # Monte le dossier local ./app dans /app
+    command: lua main.lua            # Commande par défaut (peut être changée)
+    tty: true                        # Permet d'avoir un terminal interactif
+    stdin_open: true    

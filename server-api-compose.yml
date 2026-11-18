@@ -34,5 +34,15 @@ services:
       sh -c "pip install --no-cache-dir --break-system-packages -r requirements.txt & python app.py"
     restart: unless-stopped
 
+  lua:
+    image: mhndev/docker-lua:latest
+    container_name: lua_dev
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    command: lua main.lua
+    tty: true
+    stdin_open: true
+
 volumes:
   python_packages:

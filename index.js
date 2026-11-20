@@ -6,13 +6,14 @@ const fastifyStatic = require('@fastify/static');
 const fastifyMultipart = require('@fastify/multipart')
 // const { pipeline } = require('node:stream/promises')
 const pump = require('pump')
-const { fileURLToPath } = require('url');
+//const { fileURLToPath } = require('url');
 const HOST="0.0.0.0";
 const PORT= 3004;
 const traps = require('@dnlup/fastify-traps')
 const fs = require('fs')
 const fsPromises = require('fs').promises;
 const axios = require('axios');
+ const { spawn } = require('child_process');
 
 // Register multipart plugin for file uploads
 fastify.register(require('@fastify/multipart'));
@@ -26,6 +27,58 @@ fastify.register(fastifyStatic, {
   root: '/opt/server-api/backups',
   prefix: '/opt/server-api/backups/', // Optionnel : préfixe pour vos URL (ex: /public/mon-fichier.pdf)
 });
+
+
+function runLuaInDockerFromCode(luaCode) {
+    return new Promise((resolve, reject) => {
+        // Lancer le conteneur Docker
+        const docker = spawn('docker', [ 'run', '-i', 'mgrafr/docker-lua', 'lua', '-' ]);
+        let output = '';
+        let errorOutput = '';
+
+        // Récupérer stdout
+        docker.stdout.on('data', (data) => {
+            output += data.toString();
+        });
+
+        // Récupérer stderr
+        docker.stderr.on('data', (data) => {
+            errorOutput += data.toString();
+        });
+
+        // Gestion de la fin du processus
+        docker.on('close', (code) => {
+            if (code !== 0) {
+                return reject(new Error(`Erreur Docker/Lua: ${errorOutput}`));
+            }
+            resolve(output.trim());
+        });
+  // Envoyer le code Lua au conteneur
+        docker.stdin.write(luaCode);
+        docker.stdin.end();
+    });
+}
+
+// Fonction pour exécuter un fichier Lua dans Docker
+/*function runLuaInDocker(filePath) {
+    return new Promise((resolve, reject) => {
+        // Vérifier que le fichier existe
+        if (!fs.existsSync(filePath)) {
+            return reject(new Error('Fichier Lua introuvable'));
+        }
+
+        // Commande Docker : monte le dossier et exécute Lua
+        const cmd = `docker run --rm -v ${path.resolve('./lua_scripts')}:/scripts lua:5.4 lua /scripts/${path.basename(filePath)}`;
+//docker run  -v main.lua:/scripts lua_dev scripts/
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                return reject(new Error(`Erreur Docker: ${stderr || error.message}`));
+            }
+            resolve(stdout.trim());
+        });
+    });
+}
+*/
 
 fastify.post('/upload_bd', async function (req, reply) {
   // return the first file submitted, regardless the field name
@@ -174,13 +227,45 @@ fastify.get('/restore_bd', async (request, reply) => {
 fastify.get('/script/:file', async (request, reply) => {
   try {
     const { file } = request.params;
-    const response = await axios.post('http://python_service:5004/run', { file } );
-    return response.data;
+    const ar = file.split(' ');
+     /*if (!file || typeof file !== 'string') {
+            reply.code(400);
+            return { error: 'Paramètre "file" requis' };
+        }*/
+    const ext = path.extname(ar[0]);console.log("ext="+ext);
+    switch (ext) {
+      case ".py":
+      case ".sh":
+        const response = await axios.post('http://python_service:5004/run', { file } );
+        return response.data;
+        break;
+      case ".lua": console.log("file="+file) ;
+        const code = fs.readFileSync('/opt/server-api/scripts/'+ file , 'utf8', (err, text) => {
+        if (err) {
+        console.error('Could not read:', err.message);
+        return;
+        }
+        });
+        const rawOutput = await runLuaInDockerFromCode(code);
+        // Essayer de parser le JSON renvoyé par Lua
+        let parsedOutput;
+         try {
+            parsedOutput = JSON.parse(rawOutput);
+         } catch {
+            parsedOutput = { value: rawOutput };
+         }
+
+         return { luaResult: parsedOutput };
+      break;
+      default:
+      message = "Invalid extension fichier.";
+    }
    } catch (err) {
     fastify.log.error(err);
     return reply.code(500).send({ error: 'Failed to run script', details: err.message });
   }
 });
+
 
 fastify.register(traps, {
   timeout: 5000 // wait 5 second before forcing exiting

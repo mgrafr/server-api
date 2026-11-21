@@ -35,14 +35,14 @@ services:
     restart: unless-stopped
 
   lua:
-    image: mhndev/docker-lua:latest
-    container_name: lua_dev
-    working_dir: /app
+    image: mgrafr/docker-lua:latest  # Image avec Lua + Luarocks
+    container_name: lua
     volumes:
-      - ./app:/app
-    command: lua main.lua
-    tty: true
+      - /opt/server-api/scripts:/app/modules     # 
+    command: lua main.lua            # Commande par défaut (peut être changée)
+    tty: true                        # Permet d'avoir un terminal interactif
     stdin_open: true
 
+    
 volumes:
   python_packages:

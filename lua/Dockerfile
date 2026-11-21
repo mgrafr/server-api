@@ -1,6 +1,8 @@
 FROM debian:12.5-slim
 
 LABEL org.opencontainers.image.source https://github.com/mgrafr/server-api
+LABEL org.opencontainers.image.description="docker-lua"
+LABEL org.opencontainers.image.licenses=MIT
 # Install Lua, LuaRocks, and build dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

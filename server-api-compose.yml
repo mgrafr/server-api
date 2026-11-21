@@ -34,15 +34,6 @@ services:
       sh -c "pip install --no-cache-dir --break-system-packages -r requirements.txt & python app.py"
     restart: unless-stopped
 
-  lua:
-    image: mgrafr/docker-lua:latest  # Image avec Lua + Luarocks
-    container_name: lua
-    volumes:
-      - /opt/server-api/scripts:/app/modules     # 
-    command: lua main.lua            # Commande par défaut (peut être changée)
-    tty: true                        # Permet d'avoir un terminal interactif
-    stdin_open: true
-
-    
+ 
 volumes:
   python_packages:

@@ -1,5 +1,6 @@
 FROM debian:12.5-slim
-LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api/lua
+
+LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api
 # Install Lua, LuaRocks, and build dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

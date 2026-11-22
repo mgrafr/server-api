@@ -66,7 +66,7 @@ project\
 
 **environment variables**\
    Contents of the .env file
- - *CT_LUA=mgrafr/docker-lua // ou  ghcr.io/mgrafr/docker-lua* 
+ - *CT_LUA=mgrafr/docker-lua // or ghcr.io/mgrafr/docker-lua* 
  - *PORT_SERVER-API=3004*
   
 # Using Gladys assistant

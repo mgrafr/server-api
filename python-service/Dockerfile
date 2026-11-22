@@ -5,7 +5,7 @@ WORKDIR /app
 RUN mkdir -p /app/scripts & mkdir -p /app/data
 RUN chmod -R 775 /app/scripts & chmod -R 775 /app/data 
 COPY requirements.txt .
-
+COPY app.py .
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip && \
@@ -13,8 +13,8 @@ RUN pip install --upgrade pip && \
 
 RUN groupadd -r appuser && useradd -r -g appuser -d /app -s /sbin/nologin appuser
 
-COPY app.py .
-COPY --chown=appuser:appuser . .
+
+#COPY --chown=appuser:appuser . .
 
 USER appuser
 EXPOSE 5004

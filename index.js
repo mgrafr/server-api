@@ -32,7 +32,7 @@ fastify.register(fastifyStatic, {
 function runLuaInDockerFromCode(luaCode) {
     return new Promise((resolve, reject) => {
         // Lancer le conteneur Docker
-        const docker = spawn('docker', [ 'run', '-i', 'mgrafr/docker-lua', 'lua', '-' ]);
+        const docker = spawn('docker', [ 'run', '--rm','-i', '-v', '/opt/server-api/scripts:/app/modules', 'mgrafr/docker-lua', 'lua', '-' ]);
         let output = '';
         let errorOutput = '';
 

@@ -1,6 +1,6 @@
 FROM python:3.12-slim
-#LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api
-
+LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api
+LABEL org.opencontainers.image.description run with server-api
 WORKDIR /app
 RUN mkdir -p /app/scripts & mkdir -p /app/data
 RUN chmod -R 775 /app/scripts & chmod -R 775 /app/data 

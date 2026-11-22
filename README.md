@@ -20,8 +20,8 @@ project\
  │   ├─ test.py\
  │   ├─ test.sh\
  │   ├─ main.lua\
- ├─ server-api-compose.yml
- 
+ ├─ server-api-compose.yml\
+ ├─ .env
 
 ## Features
  
@@ -63,6 +63,11 @@ project\
   - *cd /opt/server-api*
   - *wget "https:\/\/github.com/mgrafr/server-api/blob/dev/server-api-compose.yml"*
   - *docker compose -f server-api-compose up-build -d*
+
+**environment variables**\
+   Contents of the .env file
+ - *CT_LUA=mgrafr/docker-lua // ou  ghcr.io/mgrafr/docker-lua* 
+ - *PORT_SERVER-API=3004*
   
 # Using Gladys assistant
 
@@ -89,7 +94,8 @@ project\
  │   ├─ test.py\
  │   ├─ test.sh\
  │   ├─ main.lua\
- ├─ server-api-compose.yml
+ ├─ server-api-compose.yml\
+ ├─ .env
  
  ##  Fonctionnalités
  
@@ -130,6 +136,11 @@ project\
 - *cd /opt/server-api*
 - *wget https:\/\/github.com/mgrafr/server-api/blob/dev/server-api-compose.yml*
 - *docker compose -f server-api-compose up-build -d*
+
+ **variables d’environnement**\
+ Contenu du fichier .env
+ - *CT_LUA=mgrafr/docker-lua // ou  ghcr.io/mgrafr/docker-lua* 
+ - *PORT_SERVER-API=3004*
   
  # Utilisation avec Gladys assistant
  

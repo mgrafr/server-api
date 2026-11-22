@@ -1,0 +1,7 @@
+# .dockerignore
+.git/
+*.rockspec.bak
+README.md
+test/
+.luarocks/
+lua_modules/

@@ -1,3 +1,5 @@
+require('dotenv').config();
+const CTLUA=process.env.CT_LUA || 'mgrafr/docker-lua';
 const Fastify = require('fastify');
 const fastify = Fastify({ logger: true });
 const { exec } = require('child_process');
@@ -8,12 +10,12 @@ const fastifyMultipart = require('@fastify/multipart')
 const pump = require('pump')
 //const { fileURLToPath } = require('url');
 const HOST="0.0.0.0";
-const PORT= 3004;
+const PORT= process.env.PORT_SERVER_API || 3004;
 const traps = require('@dnlup/fastify-traps')
 const fs = require('fs')
 const fsPromises = require('fs').promises;
 const axios = require('axios');
- const { spawn } = require('child_process');
+const { spawn } = require('child_process');
 
 // Register multipart plugin for file uploads
 fastify.register(require('@fastify/multipart'));
@@ -32,7 +34,7 @@ fastify.register(fastifyStatic, {
 function runLuaInDockerFromCode(luaCode) {
     return new Promise((resolve, reject) => {
         // Lancer le conteneur Docker
-        const docker = spawn('docker', [ 'run', '--rm','-i', '-v', '/opt/server-api/scripts:/app/modules', 'mgrafr/docker-lua', 'lua', '-' ]);
+        const docker = spawn('docker', [ 'run', '--rm','-i', '-v', '/opt/server-api/scripts:/app/modules', CTLUA, 'lua', '-' ]);
         let output = '';
         let errorOutput = '';
 
@@ -58,27 +60,6 @@ function runLuaInDockerFromCode(luaCode) {
         docker.stdin.end();
     });
 }
-
-// Fonction pour exécuter un fichier Lua dans Docker
-/*function runLuaInDocker(filePath) {
-    return new Promise((resolve, reject) => {
-        // Vérifier que le fichier existe
-        if (!fs.existsSync(filePath)) {
-            return reject(new Error('Fichier Lua introuvable'));
-        }
-
-        // Commande Docker : monte le dossier et exécute Lua
-        const cmd = `docker run --rm -v ${path.resolve('./lua_scripts')}:/scripts lua:5.4 lua /scripts/${path.basename(filePath)}`;
-//docker run  -v main.lua:/scripts lua_dev scripts/
-        exec(cmd, (error, stdout, stderr) => {
-            if (error) {
-                return reject(new Error(`Erreur Docker: ${stderr || error.message}`));
-            }
-            resolve(stdout.trim());
-        });
-    });
-}
-*/
 
 fastify.post('/upload_bd', async function (req, reply) {
   // return the first file submitted, regardless the field name
@@ -146,12 +127,6 @@ fastify.get('/add_mod_py/:texte', async (request, reply) => {
     return reply.code(500).send({ erreur: 'Impossible d\'écrire dans le fichier.' });
       }
     });
-
-
-
-
-
-
 
 fastify.get('/', function (request, reply) {
   reply
@@ -240,22 +215,12 @@ fastify.get('/script/:file', async (request, reply) => {
         return response.data;
         break;
       case ".lua": console.log("file="+file) ;
-        const code = fs.readFileSync('/opt/server-api/scripts/'+ file , 'utf8', (err, text) => {
-        if (err) {
-        console.error('Could not read:', err.message);
-        return;
-        }
-        });
-        const rawOutput = await runLuaInDockerFromCode(code);
-        // Essayer de parser le JSON renvoyé par Lua
-        let parsedOutput;
-         try {
-            parsedOutput = JSON.parse(rawOutput);
-         } catch {
-            parsedOutput = { value: rawOutput };
-         }
-
-         return { luaResult: parsedOutput };
+        const reponse = await axios.post('http://127.0.0.1:5104/run', { file } , {
+        headers: { 'Content-Type': 'application/json' }
+        })
+        .catch(error => console.error(error));
+        return  reponse.data;    
+        break;
       break;
       default:
       message = "Invalid extension fichier.";

@@ -1,8 +1,8 @@
 services:
   api:
-    image: mgrafr/server-api:v8
+    image: mgrafr/server-api:v7
     ports:
-      - "3004:3004"
+      - "${PORT_SERVER-API}:3004"
     environment:
       - NODE_ENV=production
       - USER=root
@@ -12,5 +12,4 @@ services:
       -  /opt/server-api:/opt/server-api
       -  /var/lib/gladysassistant:/var/lib/gladysassistant
     restart: unless-stopped
-#    depends_on:
-#      - db
+

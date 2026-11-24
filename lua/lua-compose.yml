@@ -2,9 +2,11 @@
 services:
   lua:
     image: mgrafr/docker-lua:v1  # Image avec Lua + Luarocks
-    container_name: docker-lua
+    # image: ghcr.io/mgrafr/docker-lua:1.0.1 # image github
+    container_name: docker-lua  
     volumes:
       - /opt/server-api/scripts:/app/modules  # Monte le dossier local dans /app/modules
     ports:
-      - "5104:5104"   # Expose le port 5104 du conteneur sur le port 5104 de l'hôte
+      - "${PORT_LUA}:5104"  # Expose le port 5004 du conteneur sur le port 5004 de l'hôte
+    #command: lua main.lua            # Commande par défaut (peut être changée)
     

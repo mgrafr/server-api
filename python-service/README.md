@@ -13,9 +13,9 @@ docker pull mgrafr/python-service:v4 # docker.io
 
 ghcr.io pull mgrafr/python-service:1.0.4# github
 
-## docker-compose.yaml##
+## docker-compose/yml##
 
-
+ ![Screenshot.](/assets/python-service.webp)
 
 
 

@@ -1,6 +1,6 @@
 
 FROM node:24-alpine
-LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api
+#LABEL org.opencontainers.image.source https://github.com/mgra-fr/server-api
 RUN apk update && apk add bash  --no-cache bash nodejs npm sqlite
 
 RUN  mkdir -p /opt/server-api/backups &  mkdir -p /opt/server-api/data & mkdir -p /opt/server-api/uploads
@@ -13,10 +13,10 @@ RUN mkdir -p /data && chown node:node /data
 VOLUME ["/data"]
 
 # Créer le répertoire de travail
-WORKDIR /app
+WORKDIR /fastify
 
 # Donner les droits au dossier /app à l'utilisateur 'node' (présent par défaut dans les images node:alpine)
-RUN chown node:node /app
+RUN chown node:node /fastify
 
 # Passer à l'utilisateur non-root 'node'
 USER node

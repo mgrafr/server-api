@@ -211,7 +211,7 @@ fastify.get('/script/:file', async (request, reply) => {
     switch (ext) {
       case ".py":
       case ".sh":
-        const response = await axios.post('http://python_service:5004/run', { file } );
+        const response = await axios.post('http://127.0.0.1:5004/run', { file } );
         return response.data;
         break;
       case ".lua": console.log("file="+file) ;

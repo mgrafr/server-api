@@ -1,11 +1,10 @@
 
 services:
   lua:
-    image: mgrafr/docker-lua:latest  # Image avec Lua + Luarocks
-    container_name: lua
-    #working_dir: /app                # Répertoire de travail dans le conteneur
+    image: mgrafr/docker-lua:v1  # Image avec Lua + Luarocks
+    container_name: docker-lua
     volumes:
-      - /opt/server-api/scripts:/app/modules     # Monte le dossier local ./app dans /app
-    command: lua main.lua            # Commande par défaut (peut être changée)
-    tty: true                        # Permet d'avoir un terminal interactif
-    stdin_open: true
+      - /opt/server-api/scripts:/app/modules  # Monte le dossier local dans /app/modules
+    ports:
+      - "5104:5104"   # Expose le port 5104 du conteneur sur le port 5104 de l'hôte
+    

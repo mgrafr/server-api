@@ -27,17 +27,17 @@ project\
 
 ## Features
  
-- [ ] http://<ip>:3004/backup_bd // to back up databases\
-- [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
+- [ ] http://**IP SERVER**:3004/backup_bd // to back up databases\
+- [ ] curl.exe -F file=@C:**PATH**\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
       // To upload a file (.py , .sh & .lua file for execution)\
-   [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_bd/<FILE>\
+   [ ] curl.exe -F file=@C:**PATH**<FILE> http://<IP de GLADYS>:3004//upload_bd/<FILE>\
       // To upload a backup (backup db for restoration )\   
       ![Screenshot.](/assets/upload.webp)
-- [ ] http://<ip>:3004/restore_bd // to restore databases\
-- [ ] http://<ip>:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script\
+- [ ] http://**IP SERVER**:3004/restore_bd // to restore databases\
+- [ ] http://**IP SERVER**:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script\
       // If an argument is composed of several words, it must be surrounded by quotation marks\
       // so that The shell considers it as a single argument.\
- - [ ] http://<ip>:3004/add_mod_py<MODULE PYTHON NAME> // to add a module to requirements.txt\
+ - [ ] http://**IP SERVER**:3004/add_mod_py<MODULE PYTHON NAME> // to add a module to requirements.txt\
       // note: if the installation is done under Docker
 
 ## Installation & execution
@@ -103,16 +103,16 @@ project\
  
  ##  Fonctionnalités
  
- - [ ] http://<ip>:3004/backup_bd // pour sauvegarder les bases de données\
- - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
+ - [ ] http://**IP SERVEUR**:3004/backup_bd // pour sauvegarder les bases de données\
+ - [ ] curl.exe -F file=@C:**PATH**\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
      // Pour téléverser un fichier (fichier.py, sh & lua pour exécution)
- - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
+ - [ ] curl.exe -F file=@C:**PATH**<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
       // Pour téléverser une sauvegarde (sauvegarde de BD pour restauration)\
- - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\
- - [ ] http://<ip>:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script\
+ - [ ] http://**IP SERVEUR**:3004/restore_bd // pour restaurer les bases de données\
+ - [ ] http://**IP SERVEUR**:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script\
        // si un argument est composé de plusieurs mots il faut l’entourer de guillemets pour que\
        // le shell le considère comme un seul argument.\
-  - [ ] http://<ip>:3004/add_mod_py<NOM DU MODULE PYTHON> // pour ajouter un module à requirements.txt\
+  - [ ] http://**IP SERVEUR**:3004/add_mod_py<NOM DU MODULE PYTHON> // pour ajouter un module à requirements.txt\
        // note : si l'installation est effectuée sous Docker
   
 ## Installation & exécution

@@ -1,6 +1,7 @@
 services:
   api:
-    image: mgrafr/server-api:v7
+    image: ghcr.io/mgrafr/server-api:1.0.2 
+#   image: mgrafr/server-api:v8    
     ports:
       - "${PORT_SERVER-API}:3004"
     environment:

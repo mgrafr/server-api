@@ -3,6 +3,10 @@
 from flask import Flask, request, jsonify
 import subprocess
 import os
+from dotenv import load_dotenv, dotenv_values 
+# loading variables from .env file
+load_dotenv() 
+PORT = os.getenv("PORT_PYTHON_SERVICE")
 from flask_cors import CORS
 
 class Config:
@@ -56,4 +60,4 @@ def run_script():
         return jsonify({"error": "Script timed out"}), 500
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=5004, debug=False, use_reloader=False)
+   app.run(host='0.0.0.0', port=PORT, debug=False, use_reloader=False)

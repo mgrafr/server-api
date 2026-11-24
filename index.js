@@ -1,5 +1,4 @@
 require('dotenv').config();
-const CTLUA=process.env.CT_LUA || 'mgrafr/docker-lua';
 const Fastify = require('fastify');
 const fastify = Fastify({ logger: true });
 const { exec } = require('child_process');

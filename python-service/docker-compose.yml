@@ -1,20 +1,21 @@
 services:
   python-service:
-    image: mgrafr/python-service:v3
+    image: mgrafr/python-service:v4
 #   image: ghcr.io/mgrafr/python-service:1.0.3
-    container_name: python_service
+    container_name: python-service
     ports:
       - "5004:5004"
     environment:
+      - NODE_ENV=production
       - PYTHONUNBUFFERED=1
     volumes:
       - /opt/server-api/scripts:/opt/server-api/scripts
       - /opt/server-api/data:/opt/server-api/data
-      - .:/app # Monte le code et requirements.txt
+      #- .:/app # Monte le code et requirements.txt
       - python_packages:/usr/local/lib/python3.12/site-packages # Garde les paquets en cache
-    # working_dir: /app
     command: >
-      sh -c "pip install --no-cache-dir --break-system-packages -r requirements.txt & python app.py"
+      sh -c "pip install --no-cache-dir --break-system-packages -r requirements.txt & \
+      gunicorn app:app --bind 0.0.0.0:5004"
     restart: unless-stopped
 
 volumes:

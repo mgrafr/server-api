@@ -1,16 +1,21 @@
 services:
-  api:
-    image: mgrafr/server-api:v7
+  python-service:
+    image: mgrafr/python-service:v4
+#   image: ghcr.io/mgrafr/python-service:1.0.4
+    container_name: python-service
     ports:
-      - "3004:3004"
+      - "${PORT_PYTHON_SERVICE}:5004"
     environment:
       - NODE_ENV=production
-      - USER=root
+      - PYTHONUNBUFFERED=1
     volumes:
-      - ./scripts:/scripts
-      -  /opt/server-api/backups:/opt/server-api/backups
-      -  /opt/server-api:/opt/server-api
-      -  /var/lib/gladysassistant:/var/lib/gladysassistant
+      - /opt/server-api/scripts:/opt/server-api/scripts
+      - /opt/server-api/data:/opt/server-api/data
+      - python_packages:/usr/local/lib/python3.12/site-packages # Garde les paquets en cache
+    command: >
+      sh -c "pip install --no-cache-dir --break-system-packages -r requirements.txt & \
+      gunicorn app:app --bind 0.0.0.0:5004"
     restart: unless-stopped
-#    depends_on:
-#      - db
+
+volumes:
+  python_packages:

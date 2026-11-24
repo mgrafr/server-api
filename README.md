@@ -8,22 +8,21 @@ This Node.js server allows you to:
 ## Project Structure
 
 project\
- ├─ server-api *fastify* //# Code Fastify\
- │   ├─ index.js\
- │   ├─ package.json\
- ├─ python-service/  # API Python (container docker)\
- |   ├─ gunicorn //  web server security\
- │   ├─ app.py // Flask\
- │   ├─ requirements.txt\
- ├─ lua   # Serveur LUA  \
- │   ├─ app.lua // LUA server\
- │   ├─ file.lua (file containing the Lua script)\
- ├─ scripts     External scripts (.py, .sh, .lua)\
- │   ├─ test.py\
- │   ├─ test.sh\
- │   ├─ main.lua\
- ├─ server-api-compose.yml\
- ├─ .env
+├─ server-api *fastify* //# Code Fastify\
+│   ├─ index.js\
+│   ├─ package.json\
+├─ python-service/  # API Python (container docker)\
+|   ├─ gunicorn //  web server security\ │   ├─ app.py // Flask\
+│   ├─ requirements.txt\
+├─ lua   # Serveur LUA  \
+│   ├─ app.lua // LUA server\
+│   ├─ file.lua (file containing the Lua script)\
+├─ scripts     External scripts (.py, .sh, .lua)\
+│   ├─ test.py\
+│   ├─ test.sh\
+│   ├─ main.lua\
+├─ server-api-compose.yml\
+├─ .env
 
 ## Features
  

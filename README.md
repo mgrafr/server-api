@@ -29,7 +29,7 @@ project\
  
 - [ ] http://<ip>:3004/backup_bd // to back up databases\
 - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-      // To upload a file (.py & .sh file for execution)\
+      // To upload a file (.py , .sh & .lua file for execution)\
    [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_bd/<FILE>\
       // To upload a backup (backup db for restoration )\   
       ![Screenshot.](/assets/upload.webp)
@@ -105,7 +105,7 @@ project\
  
  - [ ] http://<ip>:3004/backup_bd // pour sauvegarder les bases de données\
  - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-     // Pour téléverser un fichier (fichier.py & sh pour exécution)
+     // Pour téléverser un fichier (fichier.py, sh & lua pour exécution)
  - [ ] curl.exe -F file=@C:<PATH>\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
       // Pour téléverser une sauvegarde (sauvegarde de BD pour restauration)\
  - [ ] http://<ip>:3004/restore_bd // pour restaurer les bases de données\

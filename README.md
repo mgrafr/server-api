@@ -12,10 +12,11 @@ project\
 │   ├─ index.js\
 │   ├─ package.json\
 ├─ python-service/  # API Python (container docker)\
-|   ├─ gunicorn //  web server security\ │   ├─ app.py // Flask\
+│   ├─ gunicorn  # web server security\ │  
+├─ app.py # Flask\
 │   ├─ requirements.txt\
 ├─ lua   # Serveur LUA  \
-│   ├─ app.lua // LUA server\
+│   ├─ app.lua # LUA server docker\
 │   ├─ file.lua (file containing the Lua script)\
 ├─ scripts     External scripts (.py, .sh, .lua)\
 │   ├─ test.py\
@@ -87,7 +88,7 @@ project\
  │   ├─ server.js\
  │   ├─ package.json\
  ├─ python-service   # API Python (Conteneur Docker) \
- |   ├─ gunicorn //  sécurisation serveur web\
+ │   ├─ gunicorn //  sécurisation serveur web\
  │   ├─ app.py // Flask\
  │   ├─ app.py\
  │   ├─ requirements.txt\

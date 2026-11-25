@@ -4,7 +4,7 @@ services:
 #   image: ghcr.io/mgrafr/python-service:1.0.4
     container_name: python-service
     ports:
-      - "${PORT_PYTHON_SERVICE}:5004"
+      - "5004:5004"
     environment:
       - NODE_ENV=production
       - PYTHONUNBUFFERED=1

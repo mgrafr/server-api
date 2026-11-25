@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv, dotenv_values 
 # loading variables from .env file
 load_dotenv() 
-PORT = os.getenv("PORT_PYTHON_SERVICE")
+PORT = os.getenv("PORT_WEB_PY_SERVICE")
 from flask_cors import CORS
 
 class Config:

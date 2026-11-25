@@ -1,9 +1,8 @@
 services:
   api:
-    image: ghcr.io/mgrafr/server-api:1.0.2 
-#   image: mgrafr/server-api:v8    
+    image: mgrafr/server-api:v7
     ports:
-      - "${PORT_SERVER-API}:3004"
+      - "${PORT_WEB_SERVER-API}:3004"
     environment:
       - NODE_ENV=production
       - USER=root

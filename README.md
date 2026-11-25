@@ -28,11 +28,7 @@ project\
 ## Features
  
 - [ ] http://**IP SERVER**:3004/backup_bd // to back up databases\
-- [ ] curl.exe -F file=@C:**PATH**\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-      // To upload a file (.py , .sh & .lua file for execution)\
-   [ ] curl.exe -F file=@C:**PATH**<FILE> http://<IP de GLADYS>:3004//upload_bd/<FILE>\
-      // To upload a backup (backup db for restoration )\   
-      ![Screenshot.](/assets/upload.webp)
+- [ ] http://**IP SERVER**:3004/upload // uploading db, py, sh, lua files, ...\
 - [ ] http://**IP SERVER**:3004/restore_bd // to restore databases\
 - [ ] http://**IP SERVER**:3004/script/<SCRIPT_NAME ARG1 ARG2...> // to run a script\
       // If an argument is composed of several words, it must be surrounded by quotation marks\
@@ -104,10 +100,7 @@ project\
  ##  Fonctionnalités
  
  - [ ] http://**IP SERVEUR**:3004/backup_bd // pour sauvegarder les bases de données\
- - [ ] curl.exe -F file=@C:**PATH**\<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-     // Pour téléverser un fichier (fichier.py, sh & lua pour exécution)
- - [ ] curl.exe -F file=@C:**PATH**<FILE> http://<IP de GLADYS>:3004//upload_script/<FILE>\
-      // Pour téléverser une sauvegarde (sauvegarde de BD pour restauration)\
+ - [ ] http://**IP SERVER**:3004/upload // téléversement de fichiers db,py,sh,lua, ...\
  - [ ] http://**IP SERVEUR**:3004/restore_bd // pour restaurer les bases de données\
  - [ ] http://**IP SERVEUR**:3004/script/<NOM_SCRIPT ARG1 ARG2...> // pour exécuter un script\
        // si un argument est composé de plusieurs mots il faut l’entourer de guillemets pour que\
